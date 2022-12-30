@@ -6,7 +6,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["CiCdPlayground.Web/CiCdPlayground.Web.csproj", "CiCdPlayground.Web/"]
+COPY ["CiCdPlayground.Web.csproj", "CiCdPlayground.Web/"]
 RUN dotnet restore "CiCdPlayground.Web/CiCdPlayground.Web.csproj"
 COPY . .
 WORKDIR "/src/CiCdPlayground.Web"
