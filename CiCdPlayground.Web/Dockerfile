@@ -8,8 +8,8 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["CiCdPlayground.Web.csproj", "CiCdPlayground.Web/"]
 RUN dotnet restore "CiCdPlayground.Web/CiCdPlayground.Web.csproj"
-COPY . .
 WORKDIR "/src/CiCdPlayground.Web"
+COPY . .
 RUN dotnet build "CiCdPlayground.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
