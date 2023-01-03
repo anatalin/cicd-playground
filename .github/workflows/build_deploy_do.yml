@@ -48,8 +48,6 @@ jobs:
     needs: build_and_push
     
     steps:
-      - name: Checkout the repo to get docker compose files
-        uses: actions/checkout@v2
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -59,18 +57,15 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
-            # pulling fresh version
-            cd ./projects/cicd-playground
-            git pull
             # Login to registry
             docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
-            # Stop all running containers
-            docker kill $(docker ps -q)
-            # Remove all unused containers, networks and images
-            docker system prune -af
-            # ls (to remove)
-            ls -la
-            # Export env variables
-            export TAG=$(echo $GITHUB_SHA | head -c7)
-            # Run docker compose
-            docker compose -f ./docker-compose.yml up       
+            # Stop running container
+            docker stop $(echo $IMAGE_NAME)
+            # Remove old container
+            docker rm $(echo $IMAGE_NAME)
+            # Run a new container from a new image
+            docker run -d \
+            -p 80:80 \
+            --restart always \
+            --name $(echo $IMAGE_NAME) \
+            $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)            
