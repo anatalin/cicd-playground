@@ -59,6 +59,9 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
+            # pulling fresh version
+            cd ./projects/cicd-playground
+            git pull
             # Login to registry
             docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
             # Stop all running containers
@@ -67,5 +70,5 @@ jobs:
             docker system prune -af
             # ls (to remove)
             ls -la
-            # Run a new container from a new image
+            # Run docker compose
             docker compose -f ./docker-compose.yml up       
