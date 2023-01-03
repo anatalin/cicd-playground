@@ -48,8 +48,6 @@ jobs:
     needs: build_and_push
     
     steps:
-      - name: Checkout the repo to get docker compose files
-        uses: actions/checkout@v2
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -68,11 +66,7 @@ jobs:
             docker kill $(docker ps -q)
             # Remove all unused containers, networks and images
             docker system prune -af
-            # ls (to remove)
-            ls -la
-            # Export env variables
-            echo $GITHUB_SHA
+            # Export variables for Docker Compose
             export TAG=$(echo $GITHUB_SHA | head -c7)
-            echo $TAG
-            # Run docker compose
+            # Run Docker Compose
             docker compose -f ./docker-compose.yml up -d    
