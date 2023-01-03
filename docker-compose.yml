@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   webapp:
-    image: registry.digitalocean.com/ci-cd-playground-registry/ci-cd-playground-web:latest
+    image: registry.digitalocean.com/ci-cd-playground-registry/ci-cd-playground-web:$TAG
     restart: always
     networks:
       - ci-cd-playground-network
