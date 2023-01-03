@@ -71,4 +71,4 @@ jobs:
             # ls (to remove)
             ls -la
             # Run docker compose
-            docker compose -f ./docker-compose.yml up       
+            docker compose -e TAG=$(echo $GITHUB_SHA | head -c7) -f ./docker-compose.yml up       
