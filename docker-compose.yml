@@ -4,7 +4,7 @@ services:
     image: registry.digitalocean.com/ci-cd-playground-registry/ci-cd-playground-web:latest
     restart: always
     networks:
-      ci-cd-playground-network
+      - ci-cd-playground-network
     ports:
       - "80:80"
 networks:
