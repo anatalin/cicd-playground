@@ -1,9 +1,7 @@
 version: '3.9'
 services:
   webapp:
-    environment:
-      - TAG1=$TAG
-    image: registry.digitalocean.com/ci-cd-playground-registry/ci-cd-playground-web:$TAG1
+    image: registry.digitalocean.com/ci-cd-playground-registry/ci-cd-playground-web:$TAG
     restart: always
     networks:
       - ci-cd-playground-network
