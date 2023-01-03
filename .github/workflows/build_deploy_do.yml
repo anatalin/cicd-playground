@@ -63,5 +63,7 @@ jobs:
             docker kill $(docker ps -q)
             # Remove all unused containers, networks and images
             docker system prune -af
+            # ls (to remove)
+            ls -la
             # Run a new container from a new image
-            docker-compose -f docker-compose.yml up       
+            docker compose -f ./docker-compose.yml up       
