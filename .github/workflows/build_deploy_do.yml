@@ -73,4 +73,4 @@ jobs:
             # Export env variables
             export TAG=$(echo $GITHUB_SHA | head -c7)
             # Run docker compose
-            #docker compose -f ./docker-compose.yml up       
+            docker compose -f ./docker-compose.yml up       
