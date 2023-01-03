@@ -71,6 +71,8 @@ jobs:
             # ls (to remove)
             ls -la
             # Export env variables
+            echo $GITHUB_SHA
             export TAG=$(echo $GITHUB_SHA | head -c7)
+            echo $TAG
             # Run docker compose
             docker compose -f ./docker-compose.yml up       
