@@ -70,5 +70,7 @@ jobs:
             docker system prune -af
             # ls (to remove)
             ls -la
+            # Export env variables
+            export TAG=$(echo $GITHUB_SHA | head -c7)
             # Run docker compose
-            docker compose -e TAG=$(echo $GITHUB_SHA | head -c7) -f ./docker-compose.yml up       
+            docker compose -f ./docker-compose.yml up       
