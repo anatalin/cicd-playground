@@ -48,6 +48,8 @@ jobs:
     needs: build_and_push
     
     steps:
+      - name: Checkout the repo to get docker compose files
+        uses: actions/checkout@v2
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v0.1.6
         with:
