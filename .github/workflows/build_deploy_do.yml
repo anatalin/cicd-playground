@@ -75,4 +75,4 @@ jobs:
             export TAG=$(echo $GITHUB_SHA | head -c7)
             echo $TAG
             # Run docker compose
-            docker compose -f ./docker-compose.yml up       
+            docker compose -f ./docker-compose.yml up -d    
