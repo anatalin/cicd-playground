@@ -1,6 +1,8 @@
 version: '3.9'
 services:
   webapp:
+    environment:
+      - ASPNETCORE_URLS="https://+;http://+"
     image: registry.digitalocean.com/ci-cd-playground-registry/ci-cd-playground-web:$TAG
     restart: always
     networks:
