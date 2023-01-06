@@ -7,5 +7,7 @@ services:
       - ci-cd-playground-network
     ports:
       - "80:80"
+    volumes:
+      - /var/certs/ci-cd-playground.ddns.net:/app/certs
 networks:
   ci-cd-playground-network:
